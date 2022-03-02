@@ -35,4 +35,32 @@ class ShortenerControllerTest extends TestCase
 
         $response->assertStatus(200);
     }
+
+    /** @test
+     *
+     * Non legit url shortining request can not pass.
+     *
+     * @return void
+     */
+    public function an_request_with_no_url_parameter_can_not_pass_shortening_api_validation()
+    {
+        $response = $this->post('/api/urls');
+
+        $response->assertStatus(400);
+    }
+
+    /** @test
+     *
+     * Non legit url shortining request can not pass.
+     *
+     * @return void
+     */
+    public function an_request_with_no_active_url_parameter_can_not_pass_shortening_api_validation()
+    {
+        $response = $this->post('/api/urls', [
+          'url' => 'https://www.google'
+        ]);
+
+        $response->assertStatus(400);
+    }
 }
