@@ -24,11 +24,11 @@ class URLDBSaverService implements URLSaverInterface
     
     public function get(string $shortUrl): string | null
     {
-        return $this->URLModel::where('short', $shortUrl)->first();
+        return $this->URLModel::where('short', $shortUrl)->select('url', 'short')->first();
     }
 
     public function getAll(): array
     {
-        return $this->URLModel::all()->toArray();
+        return $this->URLModel::select('url', 'short')->get()->toArray();
     }
 }

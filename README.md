@@ -5,19 +5,22 @@
 
 URL Shortener Laravel based, redis backed url shortining service.
 
-  
+## Configuration
+- Rename .env.example to .env at root of the project
+- Edit .env file and set required values. ) [docker env values set as default]
+
 ## Install
 - Install composer globally (https://getcomposer.org/)
-- Install docker (https://docs.docker.com/get-docker/) and docker-compose (https://docs.docker.com/compose/install/)
+- Install docker (https://docs.docker.com/get-docker/) and docker-compose (https://docs.docker.com/compose/install/) [optional] or {their own LAMP stack}
 - And run following command
 ```
 composer install
 
-./vendor/bin/sail up
+./vendor/bin/sail up ) [optional] or {their own LAMP stack}
+
+php artisan migrate
 ```
-## Configuration
-- Rename .env.example to .env at root of the project
-- Edit .env file and set reuqired values.
+
 
 ## Api Endpoints
 - [POST] /urls
@@ -35,14 +38,14 @@ Successful response status: 201
 Body:
 
 {
-	status: 'successfull'
+	success: '1'
 }
 
 Unsuccesfull response status: 400
 Body:
 
 {
-	status: 'bad parameter'
+	success: '0'
 }
 
 
