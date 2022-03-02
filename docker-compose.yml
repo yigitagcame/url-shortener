@@ -1,13 +1,12 @@
-# For more information: https://laravel.com/docs/sail
 version: '3'
 services:
     laravel.test:
         build:
-            context: ./vendor/laravel/sail/runtimes/8.1
+            context: ./vendor/laravel/sail/runtimes/8.0
             dockerfile: Dockerfile
             args:
                 WWWGROUP: '${WWWGROUP}'
-        image: sail-8.1/app
+        image: sail-8.0/app
         extra_hosts:
             - 'host.docker.internal:host-gateway'
         ports:
@@ -22,22 +21,29 @@ services:
         networks:
             - sail
         depends_on:
+            - mysql
             - redis
-    redis:
-        image: 'redis:alpine'
+    mysql:
+        image: 'mysql:8.0'
         ports:
-            - '${FORWARD_REDIS_PORT:-6379}:6379'
+            - '${FORWARD_DB_PORT:-3306}:3306'
+        environment:
+            MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_DATABASE: '${DB_DATABASE}'
+            MYSQL_USER: '${DB_USERNAME}'
+            MYSQL_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
         volumes:
-            - 'sail-redis:/data'
+            - 'sailmysql:/var/lib/mysql'
         networks:
             - sail
         healthcheck:
-            test: ["CMD", "redis-cli", "ping"]
+            test: ["CMD", "mysqladmin", "ping", "-p${DB_PASSWORD}"]
             retries: 3
             timeout: 5s
 networks:
     sail:
         driver: bridge
 volumes:
-    sail-redis:
+    sailmysql:
         driver: local
