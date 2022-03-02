@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
+use App\Http\Requests\ShortenerRequest;
 
 class ShortenerController extends Controller
 {
@@ -27,7 +28,7 @@ class ShortenerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create() : Response
+    public function create(ShortenerRequest $request)
     {
         $response = ['status' => 'successful'];
 
