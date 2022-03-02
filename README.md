@@ -21,11 +21,14 @@ composer install
 
 ## Api Endpoints
 - [POST] /create
-- 
+
 **Request structer:**
+
 {
 	url: <string>
 }
+
+
 **Response structers:**
 
 Successful response status: 201
@@ -40,7 +43,10 @@ Unsuccesfull response status: 400
 
 
 - {GET} /all
+
 Successful response status: 200
+
+
 [{
 	url: <string>
 	short_id: <string>
