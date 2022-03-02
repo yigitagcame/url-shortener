@@ -20,7 +20,7 @@ composer install
 - Edit .env file and set reuqired values.
 
 ## Api Endpoints
-- [POST] /create
+- [POST] /urls
 
 **Request structer:**
 
@@ -46,7 +46,7 @@ Body:
 }
 
 
-- {GET} /all
+- {GET} /urls
 
 Successful response status: 200
 
