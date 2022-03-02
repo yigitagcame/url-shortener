@@ -16,4 +16,4 @@ use App\Http\Controllers\ShortenerController;
 
 Route::get('/urls', [ShortenerController::class,'index']);
 
-Route::post('/urls', [ShortenerController::class,'create']);
+Route::post('/urls', [ShortenerController::class,'store']);

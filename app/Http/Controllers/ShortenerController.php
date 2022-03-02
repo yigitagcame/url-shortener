@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use App\Http\Requests\ShortenerRequest;
+use App\Services\URL\URLShortenerService;
 
 class ShortenerController extends Controller
 {
@@ -13,81 +14,26 @@ class ShortenerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(URLShortenerService $urlShortener)
     {
-        $urlList = [
-          'https://www.google.com' => '38320034593',
-          'https://www.twitter.com' => '29877057011',
-        ];
-
+        $urlList = $urlShortener->getAll();
         return new Response(json_encode($urlList), 200);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create(ShortenerRequest $request)
-    {
-        $response = ['status' => 'successful'];
-
-        return new Response(json_encode($response), 201);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\ShortenerRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ShortenerRequest $request, URLShortenerService $urlShortener)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $setUrl = $urlShortener->setUrl($request->input('url'));
+        
+        if ($setUrl) {
+            return new Response(json_encode(['success' => '1']), 201);
+        }
+      
+        return new Response(json_encode(['success' => '0']), 400);
     }
 }

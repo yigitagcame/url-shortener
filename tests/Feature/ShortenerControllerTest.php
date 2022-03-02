@@ -2,12 +2,13 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ShortenerControllerTest extends TestCase
 {
+    use RefreshDatabase;
+    
     /** @test
      *
      * Insert an domain for short.
