@@ -25,18 +25,22 @@ composer install
 **Request structer:**
 
 {
-	url: <string>
+	url: < string>
 }
 
 
 **Response structers:**
 
 Successful response status: 201
+Body:
+
 {
 	status: 'successfull'
 }
 
 Unsuccesfull response status: 400
+Body:
+
 {
 	status: 'bad parameter'
 }
@@ -46,10 +50,10 @@ Unsuccesfull response status: 400
 
 Successful response status: 200
 
-
+Body:
 [{
-	url: <string>
-	short_id: <string>
+	url: < string>
+	short_id: < string>
 }]
 
 
