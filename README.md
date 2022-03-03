@@ -1,9 +1,7 @@
 
 # URL Shortener
 
- 
-
-URL Shortener Laravel based, redis backed url shortining service.
+URL Shortener, instructions are below.
 
 ## Configuration
 - Rename .env.example to .env at root of the project
